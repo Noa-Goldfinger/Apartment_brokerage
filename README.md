@@ -10,7 +10,7 @@ Retrieving an apartment by ID.
 Adding an apartment.
 Apartment update.
 Status update.
->I chose not to map Route to delete an apartment. Instead I added Route to update status
+>I chose not to map Route to delete an apartment. Instead I added Route to update status.
 
 ### An apartment owner routes mapping
 Retrieving the list of owner  apartments.
