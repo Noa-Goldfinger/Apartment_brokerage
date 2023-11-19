@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication-Noa-Goldfinger", "WebApplication-Noa-Goldfinger\WebApplication-Noa-Goldfinger.csproj", "{0441C5D4-DCEA-4A0D-AD5A-E71C860A2CD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApartmentBrokerage", "WebApplication-Noa-Goldfinger\ApartmentBrokerage.csproj", "{0441C5D4-DCEA-4A0D-AD5A-E71C860A2CD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,5 @@
 
-namespace WebApplication_Noa_Goldfinger
+namespace ApartmentBrokerage
 {
     public class Program
     {
