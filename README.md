@@ -5,7 +5,7 @@
 - A client.
 
 ### An apartment routes mapping
-Retrieving the list of apartments-https://localhost:7286/api/Apartment
+Retrieving the list of apartments-/n https://localhost:7286/api/Apartment
 Retrieving an apartment by ID-https://localhost:7286/api/Apartment/1
 Adding an apartment-https://localhost:7286/api/Apartment
 Apartment update-https://localhost:7286/api/Apartment/1
