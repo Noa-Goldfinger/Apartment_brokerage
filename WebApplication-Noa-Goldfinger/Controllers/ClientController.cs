@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApplication_Noa_Goldfinger;
 using WebApplication_Noa_Goldfinger.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,15 +10,18 @@ namespace ApartmentBrokerage.Controllers
     [ApiController]
     public class ClientController : ControllerBase
     {
-        static List<Client> clientsList = new List<Client>();
-
+        readonly DataContext _dataContext;
+        public ClientController(DataContext data)
+        {
+            _dataContext = data;
+        }
         // GET: api/<ApartmentBrokerageController>
         [HttpGet]
         public IEnumerable<Client> Get(string? fullName)
         {
-            var list=clientsList;
+            var list=_dataContext.clientsList;
             if (fullName != null)
-                list = clientsList.Where(c => c.FullName == fullName).ToList();
+                list = _dataContext.clientsList.Where(c => c.FullName == fullName).ToList();
             list.OrderBy(c => c.State);
             return list;
         }
@@ -26,7 +30,7 @@ namespace ApartmentBrokerage.Controllers
         [HttpGet("{id}")]
         public ActionResult<Client> Get(int id)
         {
-            var client = clientsList.Find(c => c.Id == id);
+            var client = _dataContext.clientsList.Find(c => c.Id == id);
             if (client == null)
                 return NotFound();
             return Ok(client);
@@ -37,14 +41,14 @@ namespace ApartmentBrokerage.Controllers
         public void Post([FromBody] Client client)
         {
             client.Id = ++Client.InsexId;
-            clientsList.Add(client);
+            _dataContext.clientsList.Add(client);
         }
 
         // PUT api/<ApartmentBrokerageController>/5
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Client client)
         {
-            var c = clientsList.Find(c => c.Id == id);
+            var c = _dataContext.clientsList.Find(c => c.Id == id);
             if (c == null)
             {
                 return NotFound();
@@ -62,8 +66,8 @@ namespace ApartmentBrokerage.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            var client = clientsList.Find(c => c.Id == id);
-            clientsList.Remove(client);
+            var client = _dataContext.clientsList.Find(c => c.Id == id);
+            _dataContext.clientsList.Remove(client);
         }
     }
 }

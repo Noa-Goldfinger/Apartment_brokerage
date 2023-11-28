@@ -9,21 +9,25 @@ namespace WebApplication_Noa_Goldfinger.Controllers
     [ApiController]
     public class ApartmentOwnerController : ControllerBase
     {
-        static List<ApartmentOwner> apartmentOwnersList = new List<ApartmentOwner>();
+        readonly DataContext _dataContext;
+        public ApartmentOwnerController(DataContext data)
+        {
+            _dataContext = data;
+        }
         // GET: api/<ApartmentOwnerController>
         [HttpGet]
         public IEnumerable<ApartmentOwner> Get(string? state)
         {
             if (state != null)
-                return apartmentOwnersList.Where(c => c.Apartment.State == state).ToList();
-            return apartmentOwnersList;
+                return _dataContext.apartmentOwner.Where(c => c.Apartment.State == state).ToList();
+            return _dataContext.apartmentOwner;
         }
 
         // GET api/<ApartmentOwnerController>/5
         [HttpGet("{id}")]
         public ActionResult<ApartmentOwner> Get(int id)
         {
-            var apartmentOwner = apartmentOwnersList.Find(x => x.Id == id);
+            var apartmentOwner = _dataContext.apartmentOwner.Find(x => x.Id == id);
             if (apartmentOwner == null)
                 return NotFound();
             return Ok(apartmentOwner);
@@ -34,14 +38,14 @@ namespace WebApplication_Noa_Goldfinger.Controllers
         public void Post([FromBody] ApartmentOwner apartmentOwner)
         {
             apartmentOwner.Id = ++ApartmentOwner.IndexId;
-            apartmentOwnersList.Add(apartmentOwner);
+            _dataContext.apartmentOwner.Add(apartmentOwner);
         }
 
         // PUT api/<ApartmentOwnerController>/5
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] ApartmentOwner apartmentOwner)
         {
-            var a = apartmentOwnersList.Find(a => a.Id == id);
+            var a = _dataContext.apartmentOwner.Find(a => a.Id == id);
             if (a == null) return NotFound();
             a.FullName = apartmentOwner.FullName;
             a.Phone = apartmentOwner.Phone;
@@ -53,8 +57,8 @@ namespace WebApplication_Noa_Goldfinger.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            var apartmentOwner = apartmentOwnersList.Find(c => c.Id == id);
-            apartmentOwnersList.Remove(apartmentOwner);
+            var apartmentOwner = _dataContext.apartmentOwner.Find(c => c.Id == id);
+            _dataContext.apartmentOwner.Remove(apartmentOwner);
         }
     }
 }

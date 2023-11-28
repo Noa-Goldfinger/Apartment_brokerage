@@ -1,4 +1,6 @@
 
+using WebApplication_Noa_Goldfinger;
+
 namespace ApartmentBrokerage
 {
     public class Program
@@ -13,6 +15,7 @@ namespace ApartmentBrokerage
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSingleton<DataContext>();
 
             var app = builder.Build();
 
